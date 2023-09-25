@@ -80,4 +80,22 @@ describe('Test home page and form', () => {
     cy.contains('Request failed - please try again later.')
   })
 
+  it('Should display error message upon form submission with empty inputs' , () => {
+    cy.get('form')
+    cy.get('input[name="title"]')
+      .should('have.value', '')
+
+    cy.get('input[name="url"]')
+      .should('have.value', '')
+
+    cy.get('button')
+    cy.contains('Shorten Please!').click()
+
+    cy.get('h2')
+    cy.contains('Please enter title and description')
+
+    cy.get('.url').should('have.length', 2)
+
+  })
+
 })

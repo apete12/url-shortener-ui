@@ -16,9 +16,8 @@ function UrlForm({addToUrls}) {
     }
 
     if (!title || !urlToShorten) {
-      setFormError('Please fill out title and description')
-      console.log('Please fill out title and description')
-
+      setFormError('Please enter title and description')
+      clearInputs();
     } else {
 
       postUrl(newUrl)
