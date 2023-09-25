@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { getUrls } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
-// import UrlForm from '../UrlForm/UrlForm';
+import UrlForm from '../UrlForm/UrlForm';
 
 function App () {
   const [urls, setUrls] = useState([]);
@@ -15,11 +15,18 @@ function App () {
     }) .catch(error => console.log(error.message))
   }, [])
 
+  const addToUrls = (newUrl) => {
+    setUrls([...urls, newUrl])
+
+  }
+
+  console.log(urls)
+
   return (
     <main className="App">
       <header>
         <h1>URL Shortener</h1>
-        {/* <UrlForm /> */}
+        <UrlForm addToUrls={addToUrls}/>
       </header>
 
       <UrlContainer urls={urls}/>
