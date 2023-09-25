@@ -5,3 +5,7 @@
   padding: 5px;
   background-color: #FFF;
 }
+
+section {
+  display: grid;
+}
