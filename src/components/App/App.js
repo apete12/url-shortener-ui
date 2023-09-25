@@ -10,7 +10,6 @@ function App () {
   useEffect(() => {
     getUrls()
     .then(data => {
-      console.log(data.urls)
       setUrls(data.urls)
     }) .catch(error => console.log(error.message))
   }, [])
@@ -28,7 +27,6 @@ function App () {
         <h1>URL Shortener</h1>
         <UrlForm addToUrls={addToUrls}/>
       </header>
-
       <UrlContainer urls={urls}/>
     </main>
   );

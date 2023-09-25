@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { postUrl } from '../../apiCalls';
 
 function UrlForm({addToUrls}) {
   const [title, setTitle] = useState('');
@@ -11,8 +12,12 @@ function UrlForm({addToUrls}) {
       long_url: urlToShorten, 
       title: title
     }
-    console.log(newUrl)
-    addToUrls(newUrl);
+    postUrl(newUrl)
+    .then(data => {
+      addToUrls(data);
+    }).catch(error => console.log(error.message))
+
+   
     clearInputs();
   }
 
