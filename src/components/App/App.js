@@ -6,12 +6,16 @@ import UrlForm from '../UrlForm/UrlForm';
 
 function App () {
   const [urls, setUrls] = useState([]);
+  const [error, setError] = useState('');
+
 
   useEffect(() => {
     getUrls()
     .then(data => {
       setUrls(data.urls)
-    }) .catch(error => console.log(error.message))
+    }) .catch(error => {
+      setError(error.message)
+      console.log(error.message)})
   }, [])
 
   const addToUrls = (newUrl) => {
@@ -25,7 +29,8 @@ function App () {
         <h1>URL Shortener</h1>
         <UrlForm addToUrls={addToUrls}/>
       </header>
-      <UrlContainer urls={urls}/>
+      {error ? <h2>{error} - please try again later.</h2> : 
+      <UrlContainer urls={urls}/>}
     </main>
   );
 }

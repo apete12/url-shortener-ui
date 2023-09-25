@@ -1,6 +1,12 @@
 export const getUrls = () => {
   return fetch('http://localhost:3001/api/v1/urls')
-      .then(response => response.json())
+      .then(response => {
+        
+        if(response.ok) {
+          return response.json()
+        } else {
+          throw new Error('Request failed')
+        }})
 }
 
 export const postUrl = (newUrl) => {
@@ -10,6 +16,13 @@ export const postUrl = (newUrl) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(newUrl)
-  }).then(response => response.json())
+  })
+  .then(response => {
+        
+    if(response.ok) {
+      return response.json()
+    } else {
+      throw new Error('Request failed')
+    }})
 
 }

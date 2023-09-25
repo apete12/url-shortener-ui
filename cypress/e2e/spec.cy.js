@@ -71,5 +71,13 @@ describe('Test home page and form', () => {
     cy.contains('a', 'http://localhost:3001/useshorturl/5')
     cy.contains('p', 'https://unsplash.com/photos/IUY_3DvM__w')
   })
-  
+
+  it('Should display error message with 500 level GET request network error' , () => {
+    cy.intercept("GET", 'http://localhost:3001/api/v1/urls', {
+      statusCode: 500,
+    })
+    cy.get('h2')
+    cy.contains('Request failed - please try again later.')
+  })
+
 })
