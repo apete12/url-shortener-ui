@@ -19,8 +19,6 @@ function App () {
 
   }
 
-  console.log(urls)
-
   return (
     <main className="App">
       <header>

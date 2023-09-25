@@ -17,7 +17,6 @@ function UrlForm({addToUrls}) {
       addToUrls(data);
     }).catch(error => console.log(error.message))
 
-   
     clearInputs();
   }
 
@@ -25,8 +24,6 @@ function UrlForm({addToUrls}) {
     setTitle('');
     setUrlToShorten('');
   }
-
-  
 
   return (
     <form>
