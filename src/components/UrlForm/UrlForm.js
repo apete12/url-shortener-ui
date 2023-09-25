@@ -4,6 +4,8 @@ import { postUrl } from '../../apiCalls';
 function UrlForm({addToUrls}) {
   const [title, setTitle] = useState('');
   const [urlToShorten, setUrlToShorten] = useState('');
+  const [formError, setFormError] = useState('');
+
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -12,12 +14,21 @@ function UrlForm({addToUrls}) {
       long_url: urlToShorten, 
       title: title
     }
-    postUrl(newUrl)
-    .then(data => {
-      addToUrls(data);
-    }).catch(error => console.log(error.message))
 
-    clearInputs();
+    if (!title || !urlToShorten) {
+      setFormError('Please fill out title and description')
+      console.log('Please fill out title and description')
+
+    } else {
+
+      postUrl(newUrl)
+      .then(data => {
+        addToUrls(data);
+      }).catch(error => console.log(error.message))
+  
+      clearInputs();
+    }
+   
   }
 
   const clearInputs = () => {
@@ -46,6 +57,8 @@ function UrlForm({addToUrls}) {
       <button onClick={e => handleSubmit(e)}>
         Shorten Please!
       </button>
+
+      {formError && <h2>{formError}</h2> }
     </form>
   )
 }
