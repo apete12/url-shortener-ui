@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { postUrl } from '../../apiCalls';
 
-function UrlForm({addToUrls}) {
+function UrlForm({addToUrls, setError}) {
   const [title, setTitle] = useState('');
   const [urlToShorten, setUrlToShorten] = useState('');
   const [formError, setFormError] = useState('');
-
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,16 +17,19 @@ function UrlForm({addToUrls}) {
     if (!title || !urlToShorten) {
       setFormError('Please enter title and description')
       clearInputs();
+
     } else {
 
       postUrl(newUrl)
       .then(data => {
         addToUrls(data);
-      }).catch(error => console.log(error.message))
+      }).catch(error => {
+        console.log(error.message)
+        setError(error)
+      })
   
       clearInputs();
     }
-   
   }
 
   const clearInputs = () => {
